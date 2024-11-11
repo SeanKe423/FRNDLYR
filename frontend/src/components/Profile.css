@@ -1,0 +1,110 @@
+/* frontend/src/components/Profile.css */
+
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-image: url('https://images.unsplash.com/photo-1555817129-2fa6b81bd8e5?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+    background-size: cover;
+    background-position: center;
+    color: #FFFFFF;
+    position: relative;
+    padding: 40px;
+}
+
+.profile-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 51, 102, 0.8); /* Darker overlay */
+    z-index: 1;
+}
+
+.profile-title {
+    font-size: 3em; /* Increased font size for more prominence */
+    color: #FFD966;
+    margin-bottom: 10px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 600;
+    z-index: 2;
+}
+
+.profile-form {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    max-width: 700px;
+    background: rgba(255, 255, 255, 0.684); /* Slightly transparent white */
+    padding: 24px;
+    border-radius: 15px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+    z-index: 2;
+}
+
+.form-label {
+    color: #003366;
+    margin-bottom: 12px;
+    font-size: 1.2em; /* Increased font size */
+    font-weight: 500;
+}
+
+.form-input,
+.checkbox-input {
+    padding: 15px;
+    margin-bottom: 25px;
+    border: 2px solid #FFD966;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.654);
+    color: #003366;
+    font-size: 1.2em; /* Increased font size for better readability */
+    transition: border 0.3s ease;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: #FFCC33; /* Border color changes when focused */
+}
+
+.checkbox-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.checkbox-item {
+    display: flex;
+    align-items: center;
+    width: 45%;
+}
+
+.checkbox-label {
+    margin-left: 10px;
+    font-size: 1.1em;
+    font-weight: 400;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.profile-button {
+    padding: 15px;
+    font-size: 1.3em; /* Larger button text */
+    background-color: #FFD966;
+    color: #003366;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    z-index: 2;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.profile-button:hover {
+    background-color: #FFCC33;
+    transition: background-color 0.3s ease;
+}

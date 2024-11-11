@@ -1,0 +1,78 @@
+/* frontend/src/components/LandingPage.css */
+
+.landing-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-image: url('https://images.unsplash.com/photo-1529156069898-49953e39b3ac?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); /* Random friendship-themed image */
+    background-size: cover;
+    background-position: center;
+    color: #333; /* Dark gray for text */
+    position: relative;
+}
+
+.landing-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 51, 102, 0.5); /* Dark blue overlay for readability */
+    z-index: 1;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 20px;
+    z-index: 2; /* Ensures it appears above the overlay */
+}
+
+.app-name {
+    font-size: 4em;
+    color: #FFD966; /* Soft yellow */
+    font-weight: bold;
+}
+
+.tagline {
+    font-size: 1.5em;
+    color: #FFFFFF; /* White for tagline */
+    margin-top: 10px;
+}
+
+.button-group {
+    display: flex;
+    gap: 15px;
+    z-index: 2;
+}
+
+.get-started-button,
+.login-button {
+    padding: 15px 30px;
+    font-size: 1.2em;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.get-started-button {
+    background-color: #FFD966; /* Soft yellow */
+    color: #003366; /* Dark blue text */
+}
+
+.get-started-button:hover {
+    background-color: #FFC107; /* Slightly darker yellow */
+}
+
+.login-button {
+    background-color: #FFFFFF; /* White background for contrast */
+    color: #003366; /* Dark blue text */
+}
+
+.login-button:hover {
+    background-color: #E0E0E0; /* Light gray on hover */
+}
