@@ -11,6 +11,7 @@ const SignUp = () => {
         email: '',
         password: '',
     });
+    const [isLoading, setIsLoading] = useState(false);
 
     const { username, email, password } = formData;
 
@@ -21,13 +22,31 @@ const SignUp = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setIsLoading(true);
         try {
-            await axios.post('http://localhost:5000/api/auth/signup', formData);
-            alert('Signup successful!');
+            // 1. Sign up the user
+            const signupResponse = await axios.post('http://localhost:5000/api/auth/signup', {
+                username,
+                email,
+                password
+            });
+            
+            // 2. Store the token
+            const token = signupResponse.data.token;
+            localStorage.setItem('token', token);
+            
+            // 3. Set the default authorization header for all future requests
+            axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+            
+            // 4. Navigate to profile page
             navigate('/profile');
+            
         } catch (error) {
-            console.error('Error during signup:', error);
-            alert('Signup failed. Please try again.');
+            const errorMessage = error.response?.data?.message || 'Signup failed';
+            alert(errorMessage);
+            console.error('Signup error:', error.response?.data);
+        } finally {
+            setIsLoading(false);
         }
     };
 
@@ -65,7 +84,9 @@ const SignUp = () => {
                     required
                 />
 
-                <button type="submit" className="signup-button">Sign Up</button>
+                <button type="submit" className="signup-button" disabled={isLoading}>
+                    {isLoading ? 'Signing Up...' : 'Sign Up'}
+                </button>
             </form>
         </div>
     );

@@ -21,12 +21,17 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('http://localhost:5000/api/auth/login', formData);
-            alert('Login successful!');
-            navigate('/profile');
+            const response = await axios.post('http://localhost:5000/api/auth/login', formData);
+            const { token } = response.data;
+
+            if (token) {
+                localStorage.setItem('token', token);
+                navigate('/profile');
+            }
         } catch (error) {
-            console.error('Login error:', error);
-            alert('Login failed. Please try again.');
+            const errorMessage = error.response?.data?.message || 'Login failed. Please try again.';
+            alert(errorMessage);
+            console.error('Login error:', error.response?.data || error);
         }
     };
 
