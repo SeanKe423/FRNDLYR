@@ -95,7 +95,15 @@ const Matches = () => {
     // Show matches
     return (
         <div className="matches-container">
-            <h2 className="matches-title">Your Matches</h2>
+            <div className="matches-header">
+                <button 
+                    onClick={() => navigate('/')} 
+                    className="back-home-button"
+                >
+                    ← Back to Home
+                </button>
+                <h2 className="matches-title">Your Matches</h2>
+            </div>
             <div className="matches-grid">
                 {matches.map((match) => (
                     <div key={match._id} className="match-card">
