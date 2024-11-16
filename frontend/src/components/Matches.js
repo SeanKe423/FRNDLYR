@@ -115,7 +115,12 @@ const Matches = () => {
                         <div className="match-info">
                             <h3>{match.username}</h3>
                             <p className="match-age">{match.age} years old</p>
-                            <button className="view-profile-btn">View Profile</button>
+                            <button 
+                                onClick={() => navigate(`/chat/${match._id}`)} 
+                                className="chat-button"
+                            >
+                                Chat
+                            </button>
                         </div>
                     </div>
                 ))}

@@ -6,6 +6,7 @@ import SignUp from './components/SignUp';
 import Login from './components/Login';
 import Profile from './components/Profile';
 import Matches from './components/Matches'; // Import the Matches component
+import Chat from './components/Chat';
 
 function App() {
     return (
@@ -16,6 +17,7 @@ function App() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/matches" element={<Matches />} /> {/* Add Matches route */}
+                <Route path="/chat/:userId" element={<Chat />} />
             </Routes>
         </Router>
     );
