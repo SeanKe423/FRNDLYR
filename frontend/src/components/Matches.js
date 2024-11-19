@@ -3,12 +3,15 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './Matches.css';
+import ReportModal from './ReportModal';
 
 const Matches = () => {
     const navigate = useNavigate();
     const [matches, setMatches] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [reportModalOpen, setReportModalOpen] = useState(false);
+    const [selectedUser, setSelectedUser] = useState(null);
 
     useEffect(() => {
         const fetchMatches = async () => {
@@ -46,6 +49,11 @@ const Matches = () => {
 
         fetchMatches();
     }, [navigate]);
+
+    const handleReport = (match) => {
+        setSelectedUser(match);
+        setReportModalOpen(true);
+    };
 
     // Show loading state
     if (loading) {
@@ -123,16 +131,34 @@ const Matches = () => {
                         <div className="match-info">
                             <h3>{match.username}</h3>
                             <p className="match-age">{match.age} years old</p>
-                            <button 
-                                onClick={() => navigate(`/chat/${match._id}`)} 
-                                className="chat-button"
-                            >
-                                Chat
-                            </button>
+                            <div className="match-actions">
+                                <button 
+                                    onClick={() => navigate(`/chat/${match._id}`)} 
+                                    className="chat-button"
+                                >
+                                    Chat Now
+                                </button>
+                                <button 
+                                    onClick={() => handleReport(match)} 
+                                    className="report-button"
+                                >
+                                    Report
+                                </button>
+                            </div>
                         </div>
                     </div>
                 ))}
             </div>
+
+            <ReportModal 
+                isOpen={reportModalOpen}
+                onClose={() => {
+                    setReportModalOpen(false);
+                    setSelectedUser(null);
+                }}
+                reportedUserId={selectedUser?._id}
+                reportedUsername={selectedUser?.username}
+            />
         </div>
     );
 };
