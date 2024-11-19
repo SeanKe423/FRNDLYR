@@ -21,6 +21,7 @@ const connectDB = async () => {
 
 const authRoutes = require('./routes/authRoutes');
 const chatRoutes = require('./routes/chatRoutes');
+const reportRoutes = require('./routes/reportRoutes');
 const app = express();
 connectDB();
 
@@ -44,6 +45,7 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 app.use('/api/auth', authRoutes);
 app.use('/api/chat', chatRoutes);
+app.use('/api/report', reportRoutes);
 
 app.get('/test', (req, res) => {
     res.json({ message: 'Server is running' });

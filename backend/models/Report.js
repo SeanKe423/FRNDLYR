@@ -24,11 +24,9 @@ const reportSchema = new mongoose.Schema({
         type: String,
         enum: ['Pending', 'Under Review', 'Resolved'],
         default: 'Pending'
-    },
-    createdAt: {
-        type: Date,
-        default: Date.now
     }
+}, {
+    timestamps: true
 });
 
 module.exports = mongoose.model('Report', reportSchema); 

@@ -3,10 +3,18 @@ const router = express.Router();
 const Report = require('../models/Report');
 const auth = require('../middleware/auth');
 
-// Submit a report
+// Submit report
 router.post('/submit', auth, async (req, res) => {
     try {
+        console.log('Received report:', req.body); // Debug log
+
         const { reportedUserId, reason, description } = req.body;
+
+        if (!reportedUserId || !reason || !description) {
+            return res.status(400).json({ 
+                message: 'Missing required fields' 
+            });
+        }
 
         const report = new Report({
             reporter: req.user.id,
@@ -16,22 +24,18 @@ router.post('/submit', auth, async (req, res) => {
         });
 
         await report.save();
-        res.status(201).json({ message: 'Report submitted successfully' });
+        console.log('Report saved:', report); // Debug log
+
+        res.status(201).json({ 
+            message: 'Report submitted successfully',
+            report 
+        });
     } catch (error) {
         console.error('Report submission error:', error);
-        res.status(500).json({ message: 'Error submitting report' });
-    }
-});
-
-// Get user's submitted reports
-router.get('/my-reports', auth, async (req, res) => {
-    try {
-        const reports = await Report.find({ reporter: req.user.id })
-            .populate('reportedUser', 'username')
-            .sort({ createdAt: -1 });
-        res.json(reports);
-    } catch (error) {
-        res.status(500).json({ message: 'Error fetching reports' });
+        res.status(500).json({ 
+            message: 'Error submitting report',
+            error: error.message 
+        });
     }
 });
 

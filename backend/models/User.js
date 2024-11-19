@@ -11,7 +11,20 @@ const UserSchema = new mongoose.Schema({
     location: { type: String, default: '' },
     age: { type: Number, min: 18, max: 120 },
     profilePicture: { type: String },
-    createdAt: { type: Date, default: Date.now }
+    createdAt: { type: Date, default: Date.now },
+    role: {
+        type: String,
+        enum: ['user', 'admin'],
+        default: 'user'
+    },
+    isBanned: {
+        type: Boolean,
+        default: false
+    },
+    banReason: {
+        type: String,
+        default: null
+    }
 });
 
 // Hash password before saving

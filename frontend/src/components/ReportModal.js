@@ -25,7 +25,17 @@ const ReportModal = ({ isOpen, onClose, reportedUserId, reportedUsername }) => {
 
         try {
             const token = localStorage.getItem('token');
-            await axios.post(
+            if (!token) {
+                throw new Error('No authentication token found');
+            }
+
+            console.log('Submitting report:', {
+                reportedUserId,
+                reason,
+                description
+            });
+
+            const response = await axios.post(
                 'http://localhost:5000/api/report/submit',
                 {
                     reportedUserId,
@@ -33,10 +43,14 @@ const ReportModal = ({ isOpen, onClose, reportedUserId, reportedUsername }) => {
                     description
                 },
                 {
-                    headers: { Authorization: `Bearer ${token}` }
+                    headers: { 
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    }
                 }
             );
 
+            console.log('Report response:', response.data);
             setSuccess('Report submitted successfully');
             setTimeout(() => {
                 onClose();
